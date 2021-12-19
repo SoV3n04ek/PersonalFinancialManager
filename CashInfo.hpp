@@ -53,7 +53,7 @@ public:
 		this->value = value; 
 		return *this; 
 	}
-	CashInfo& setDesription(const std::string& description) 
+	CashInfo& setDescription(const std::string& description) 
 	{ 
 		this->description = description; 
 		return *this; 
