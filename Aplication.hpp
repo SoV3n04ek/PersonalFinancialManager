@@ -7,6 +7,20 @@ class Aplication
 {
 	std::vector<CashExpense> expenses; // -
 	std::vector<CashIncome>   incomes; // +
+	void bubleSortExpense(std::vector<CashExpense> )
+	{
+		size_t size = expenses.size();
+		for (size_t index = 0; index < size; index++)
+			for (int j = 0; j < size - index - 1; j++)
+				if (expenses[j].getDate() > expenses[j + 1].getDate())
+				{
+					//swap(&arr[j], &arr[j + 1]);
+				}
+	}
+	void bubleSortIncome(std::vector<CashIncome>)
+	{
+
+	}
 public:
 	Aplication(const char *configPath = nullptr)
 	{
@@ -16,6 +30,11 @@ public:
 		}
 	}
 	~Aplication() { }
+
+	void sortExpenseByDateTime()
+	{
+
+	}
 
 	// ============== Cash Expense methods ==============
 

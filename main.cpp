@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CashExpense.hpp"
+#include "Aplication.hpp"
 #include "winconio.h"
 using namespace std;
 
@@ -33,19 +33,18 @@ using namespace std;
 	(читабельность, разделение по файлам / классам,
 		соответствие хорошим практикам).
 */
+
+//> < == DateTime
+//sort vectors 
+
 int main()
 {
 	SetConsoleWindowSize(100, 50);
 	SetConsoleCursorSize();
+	
+	Aplication app;
 
-	int value = 12500;
-	string description = "";
-	bool done = false;
-	const DateTime& date = DateTime();
+	app.addCashExpense(DateTime(), -2000, "bebra", true);
 
-
-	CashExpense* a = new CashExpense(date, value, description, done);
-
-	cout << a->getValue();
-	delete a;
+	
 }
