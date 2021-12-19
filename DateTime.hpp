@@ -7,7 +7,8 @@ enum MONTH_NAMES {
 	OCTOBER, NOVEMBER, DECEMBER
 };
 
-class DateTime {
+class DateTime 
+{
 private:
 	short month;
 	short day;

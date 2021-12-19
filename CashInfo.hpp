@@ -1,5 +1,6 @@
 #pragma once
 #include "DateTime.hpp"
+#include "ICashInfo.hpp"
 #include <string>
 
 class CashInfo
@@ -8,26 +9,36 @@ private:
 	DateTime date;
 	int value;
 	std::string description;
+	bool done;
 public:
-	CashInfo(const DateTime &date = DateTime(), int value = 0, std::string description = "")
+	CashInfo(const DateTime &date = DateTime(), int value = 0, 
+				std::string description = "", bool done = false)
 	:
 		date(date),
 		value(value),
-		description(description)
+		description(description),
+		done(done)
 	{ }
 
-	CashInfo(const CashInfo &other)
+	CashInfo(const CashInfo& other)
 	:
 		date(other.getDate()),
 		value(other.getValue()),
-		description(other.getDescription())
+		description(other.getDescription()),
+		done(other.isDone())
 	{ }
 
 	DateTime	getDate()		 const { return date;		 }
 	int			getValue()		 const { return value;		 }
 	std::string getDescription() const { return description; }
+	bool		isDone()		 const { return done;		 }		
 
-	CashInfo& setDate(const DateTime& date)
+	CashInfo& setDone(bool isDone)
+	{
+		done = isDone;
+		return *this;
+	}
+	CashInfo& setDate(const DateTime& date) 
 	{ 
 		this->date = date; 
 		return *this;
@@ -48,4 +59,9 @@ public:
 		return *this; 
 	}
 
+	std::string toStr() const {
+		std::string result;
+		result = "";
+		return result;
+	}
 };
