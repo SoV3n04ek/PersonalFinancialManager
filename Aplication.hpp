@@ -7,16 +7,16 @@ class Aplication
 {
 	std::vector<CashExpense> expenses; // -
 	std::vector<CashIncome>   incomes; // +
-	void bubleSortExpense(std::vector<CashExpense> )
+	
+	template <typename T>
+	void swap(T &a1, T &a2)
 	{
-		size_t size = expenses.size();
-		for (size_t index = 0; index < size; index++)
-			for (int j = 0; j < size - index - 1; j++)
-				if (expenses[j].getDate() > expenses[j + 1].getDate())
-				{
-					//swap(&arr[j], &arr[j + 1]);
-				}
+		T tmp = a1;
+		a1 = a2;
+		a2 = tmp;
 	}
+
+
 	void bubleSortIncome(std::vector<CashIncome>)
 	{
 
@@ -31,9 +31,24 @@ public:
 	}
 	~Aplication() { }
 
+	void printCashExpenses() const
+	{
+		for (auto& it : expenses)
+			std::cout << it.getDate() << "  " << it.getValue() << std::endl;
+	}
+
+	void bubleSortExpenses()
+	{
+		size_t size = expenses.size();
+		for (size_t index = 0; index < size; index++)
+			for (int j = 0; j < size - index - 1; j++)
+				if (expenses[j].getDate().getCountDaysFrom1990() > expenses[j + 1].getDate().getCountDaysFrom1990())
+					swap<CashExpense>(expenses[j], expenses[j + 1]);
+	}
+
 	void sortExpenseByDateTime()
 	{
-
+			
 	}
 
 	// ============== Cash Expense methods ==============
@@ -43,8 +58,8 @@ public:
 		expenses.push_back(expense);
 	}
 
-	void addCashExpense(const DateTime& date = DateTime(), int value = 0,
-		std::string description = "", bool done = false)
+	void addCashExpense(const DateTime& date, int value,
+		const std::string &description, bool done)
 	{
 		expenses.push_back(CashExpense(date, value, description, done));
 	}
@@ -59,13 +74,8 @@ public:
 		expenses[expenseIndex].setDone(done);
 	}
 
-	void editCashExpenseValue(size_t expenseIndex, int value)
-	{
-		expenses[expenseIndex].setValue(value);
-	}
-
-	void editCashExpenseDate(size_t expenseIndex, short day = 0, short month = 0, 
-		short year = 0,	short hours = 0, short mins = 0)
+	void editCashExpenseDate(size_t expenseIndex, short day, short month, 
+		short year,	short hours, short mins)
 	{
 		DateTime res(day, month, year, hours, mins);
 		expenses[expenseIndex].setDate(res);
@@ -75,45 +85,10 @@ public:
 	{
 		expenses[expenseIndex].setDate(other);
 	}
-	
-	void addCashExpense(const CashExpense &expense)
-	{
-		expenses.push_back(expense);
-	}
-
-	void addCashExpense(const DateTime& date = DateTime(), int value = 0,
-		std::string description = "", bool done = false)
-	{
-		expenses.push_back(CashExpense(date, value, description, done));
-	}
-
-	void deleteCashExpense(size_t expenseIndex)
-	{
-		expenses.erase(expenses.begin() + expenseIndex);
-	}
-
-	void editCashExpenseDone(size_t expenseIndex, bool done)
-	{
-		expenses[expenseIndex].setDone(done);
-	}
 
 	void editCashExpenseValue(size_t expenseIndex, int value)
 	{
 		expenses[expenseIndex].setValue(value);
-	}
-
-	void editCashExpenseDate(size_t expenseIndex, short day = 0, short month = 0, 
-		short year = 0,	short hours = 0, short mins = 0)
-	{
-		DateTime res(day, month, year, hours, mins);
-		expenses[expenseIndex].setDate(res);
-	}
-
-	void editCashExpenseDate(size_t expenseIndex, short day = 0, short month = 0,
-		short year = 0, short hours = 0, short mins = 0)
-	{
-		DateTime res(day, month, year, hours, mins);
-		expenses[expenseIndex].setDate(res);
 	}
 
 	void editCashExpenseDate(size_t expenseIndex, const DateTime& other)
@@ -133,15 +108,10 @@ public:
 		incomes.push_back(income);
 	}
 
-	void addCashIncome(const DateTime& date = DateTime(), int value = 0,
-		std::string description = "", bool done = false)
+	void addCashIncome(const DateTime& date, int value,
+		const std::string &description, bool done)
 	{
 		incomes.push_back(CashIncome(date, value, description, done));
-	}
-
-	void deleteCashIncome(size_t incomeIndex)
-	{
-		incomes.erase(incomes.begin() + incomeIndex);
 	}
 
 	void editCashIncome(size_t incomeIndex, const CashIncome& income)
@@ -158,58 +128,23 @@ public:
 		incomes[incomeIndex].setDone(done);
 	}
 
-	void editCashIncomeValue(size_t incomeIndex, int value)
-	{
-		incomes[incomeIndex].setValue(value);
-	}
-
-	void editCashIncomeDate(size_t incomeIndex, short day = 0, short month = 0,
-		short year = 0, short hours = 0, short mins = 0)
-	{
-		DateTime res(day, month, year, hours, mins);
-		incomes[incomeIndex].setDate(res);
-	}
-
 	void editCashIncomeDescription(size_t incomeIndex, const DateTime& other)
 	{
 		incomes[incomeIndex].setDate(other);
 	}
-
-	void addCashIncome(const CashIncome& income)
-	{
-		incomes.push_back(income);
-	}
-
-	void addCashIncome(const DateTime& date = DateTime(), int value = 0,
-		std::string description = "", bool done = false)
-	{
-		incomes.push_back(CashIncome(date, value, description, done));
-	}
-
+		
 	void deleteCashIncome(size_t incomeIndex)
 	{
 		incomes.erase(incomes.begin() + incomeIndex);
 	}
 
-	void editCashIncomeDone(size_t incomeIndex, bool done)
-	{
-		incomes[incomeIndex].setDone(done);
-	}
-
 	void editCashIncomeValue(size_t incomeIndex, int value)
 	{
 		incomes[incomeIndex].setValue(value);
 	}
 
-	void editCashIncomeDate(size_t incomeIndex, short day = 0, short month = 0,
-		short year = 0, short hours = 0, short mins = 0)
-	{
-		DateTime res(day, month, year, hours, mins);
-		incomes[incomeIndex].setDate(res);
-	}
-
-	void editCashIncomeDate(size_t incomeIndex, short day = 0, short month = 0,
-		short year = 0, short hours = 0, short mins = 0)
+	void editCashIncomeDate(size_t incomeIndex, short day, short month,
+		short year, short hours, short mins)
 	{
 		DateTime res(day, month, year, hours, mins);
 		incomes[incomeIndex].setDate(res);

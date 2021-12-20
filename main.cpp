@@ -44,7 +44,28 @@ int main()
 	
 	Aplication app;
 
-	app.addCashExpense(DateTime(), -2000, "bebra", true);
+	CashExpense ce[3] = { CashExpense(DateTime(2, 2, 2022), -1200),
+						  CashExpense(DateTime(2, 2, 1991), -1300),
+						  CashExpense(DateTime(2, 2, 2003), -2220) };
 
-	
+	for (int i = 0; i < 3; i++)
+	{
+		app.addCashExpense(ce[i]);
+	}
+
+	// test sorts 
+	cout << "Not sorted array: \n\n";
+	app.printCashExpenses();
+	app.bubleSortExpenses();
+	cout << "\nSorted array: \n\n";
+	app.printCashExpenses();
+	//app.addCashExpense(DateTime(), -2000, "bebra", true);
+	//DateTime dt(1, 1, 2021, 20, 12);
+	////DateTime dt2(1, 1, 2021, 20, 12);
+	//DateTime dt2(1, 1, 1992, 20, 12);
+
+	//cout << dt.getCountDaysFrom1990() << "\t" << dt2.getCountDaysFrom1990() << endl;
+	//cout << (bool) (dt < dt2);
+	//for (int i = 1; i <= 100; i++)
+	//	cout << "|";
 }
